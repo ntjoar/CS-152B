@@ -24,7 +24,7 @@ module seq_circuit(
 				counter = d;
 				carry = 1'b0;
 			end else if(up == 1'b1) begin
-				if(q == 4'b0101) begin
+				if(q == 4'b1001) begin
 					counter = 4'b0000;
 					carry = 1'b1;
 				end else begin
