@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-module comb_circuit_tb();
+module comb_circuit_11_tb();
 	reg clk;
 	reg [15:0] inval;
 	
@@ -22,5 +22,5 @@ module comb_circuit_tb();
 	 * );
 	 */
 
-	comb_circuit MUT3(clk, inval, result);
+	comb_circuit_11 MUT3(inval, result);
 endmodule

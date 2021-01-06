@@ -28,5 +28,5 @@ module seq_circuit_tb();
 	 * );
 	 */
 
-	seq_circuit MUT(clk, inval[4], inval[5], inval[6], 1'b1, inval[3:0], counter, carry);
+	seq_circuit MUT(inval[4], inval[5], inval[6], 1'b1, inval[3:0], counter, carry);
 endmodule 

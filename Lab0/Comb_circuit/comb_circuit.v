@@ -3,7 +3,6 @@
  */
 
 module comb_circuit(
-	input CLK,
 	input [15:0] inval,
 	output divisible
 );
@@ -17,7 +16,7 @@ module comb_circuit(
 	reg temp5 [1:0];
 	reg temp;
 
-	always @(posedge CLK) begin
+	always @(*) begin
 		/* First Level */
 		temp0[15] = inval[15] & (~inval[14]);
 		temp0[14] = inval[14] & (~inval[15]);

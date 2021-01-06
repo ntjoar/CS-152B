@@ -3,7 +3,6 @@
  */
 
 module seq_circuit(
-	input CLK,
 	input enable, 
 	input load, 
 	input up, 
@@ -15,7 +14,7 @@ module seq_circuit(
 	reg[3:0] counter;
 	reg carry;
 
-	always @(posedge CLK) begin
+	always @(*) begin
 		if(clr == 1'b0) begin
 			counter = 4'hx;
 			carry = 1'b0;
