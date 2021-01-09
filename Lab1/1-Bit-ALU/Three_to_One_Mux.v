@@ -10,14 +10,8 @@ module Three_to_One_Mux (
 	output value
 );
 
-	reg val;
-
-	always @(*) begin
-		val = (i0 & ~selector[1] & ~selector[0]) | // selector == 2'b00
-			  (i1 & ~selector[1] &  selector[0]) | // selector == 2'b01
-			  (i2 &  selector[1] & ~selector[0]);  // selector == 2'b10
-	end
-
-	assign value = val;
+	assign value = (i0 & ~selector[1] & ~selector[0]) | // selector == 2'b00
+		       (i1 & ~selector[1] &  selector[0]) | // selector == 2'b01
+		       (i2 &  selector[1] & ~selector[0]);  // selector == 2'b10;
 
 endmodule

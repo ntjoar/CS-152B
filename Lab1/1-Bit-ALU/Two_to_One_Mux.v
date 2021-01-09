@@ -9,13 +9,7 @@ module Two_to_One_Mux (
 	output value
 );
 
-	reg val;
-
 	/* selector == 1 ? i1 : i0; */
-	always @(*) begin
-		val = (i0 & ~selector) | (i1 & selector); 
-	end
-
-	assign value = val;
+	assign value = (i0 & ~selector) | (i1 & selector);
 
 endmodule

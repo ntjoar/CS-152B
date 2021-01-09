@@ -10,19 +10,10 @@ module addbit (
 	output sum
 );
 
-	reg val;
-	reg carry;
+	// (a ^ b) ^ cin => ((a & ~b) | (~a & b)) ^ cin => (~((a & ~b) | (~a & b)) & cin) | (((a & ~b) | (~a & b)) & ~cin)
+	assign sum = (~((a & ~b) | (~a & b)) & cin) | (((a & ~b) | (~a & b)) & ~cin);
 
-	/* Note: a ^ b = (a & ~b) | (~a & b) */
-	always @(*) begin
-		// (a ^ b) ^ cin => ((a & ~b) | (~a & b)) ^ cin => (~((a & ~b) | (~a & b)) & cin) | (((a & ~b) | (~a & b)) & ~cin)
-		val = (~((a & ~b) | (~a & b)) & cin) | (((a & ~b) | (~a & b)) & ~cin);
-
-		// (a & b) | ((a ^ b) & cin) => (a & b) | (((a & ~b) | (~a & b)) & cin)
-		carry = (a & b) | (((a & ~b) | (~a & b)) & cin); 
-	end
-
-	assign sum = val;
-	assign co = carry;
+	// (a & b) | ((a ^ b) & cin) => (a & b) | (((a & ~b) | (~a & b)) & cin)
+	assign co = (a & b) | (((a & ~b) | (~a & b)) & cin); 
 
 endmodule
