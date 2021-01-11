@@ -23,21 +23,30 @@ module mux16 (
 	output val
 );
 
-	assign val = (~s[3] & ~s[2] & ~s[1] & ~s[0] & in0) | // 0000
-				 (~s[3] & ~s[2] & ~s[1] &  s[0] & in1) | // 0001
-				 (~s[3] & ~s[2] &  s[1] & ~s[0] & in2) | // 0010
-				 (~s[3] & ~s[2] &  s[1] &  s[0] & in3) | // 0011
-				 (~s[3] &  s[2] & ~s[1] & ~s[0] & in4) | // 0100
-				 (~s[3] &  s[2] & ~s[1] &  s[0] & in5) | // 0101
-				 (~s[3] &  s[2] &  s[1] & ~s[0] & in6) | // 0110
-				 (~s[3] &  s[2] &  s[1] &  s[0] & in7) | // 0111
-				 ( s[3] & ~s[2] & ~s[1] & ~s[0] & in8) | // 1000
-				 ( s[3] & ~s[2] & ~s[1] &  s[0] & in9) | // 1001
-				 ( s[3] & ~s[2] &  s[1] & ~s[0] & in10) | // 1010
-				 ( s[3] & ~s[2] &  s[1] &  s[0] & in11) | // 1011
-				 ( s[3] &  s[2] & ~s[1] & ~s[0] & in12) | // 1100
-				 ( s[3] &  s[2] & ~s[1] &  s[0] & in13) | // 1101
-				 ( s[3] &  s[2] &  s[1] & ~s[0] & in14) | // 1110
-				 ( s[3] &  s[2] &  s[1] &  s[0] & in15); // 1111
+	wire l0_1, l0_2, l0_3, l0_4, l0_5, l0_6, l0_7, l0_8,
+		 l1_1, l1_2, l1_3, l1_4,
+		 l2_1, l2_2,
+		 l3_1;
+
+	Two_to_One_Mux m0_1(in0, in1, s[0], l0_1);
+	Two_to_One_Mux m0_2(in2, in3, s[0], l0_2);
+	Two_to_One_Mux m0_3(in4, in5, s[0], l0_3);
+	Two_to_One_Mux m0_4(in6, in7, s[0], l0_4);
+	Two_to_One_Mux m0_5(in8, in9, s[0], l0_5);
+	Two_to_One_Mux m0_6(in10, in11, s[0], l0_6);
+	Two_to_One_Mux m0_7(in12, in13, s[0], l0_7);
+	Two_to_One_Mux m0_8(in14, in15, s[0], l0_8);
+
+	Two_to_One_Mux m1_1(l0_1, l0_2, s[1], l1_1);
+	Two_to_One_Mux m1_2(l0_3, l0_4, s[1], l1_2);
+	Two_to_One_Mux m1_3(l0_5, l0_6, s[1], l1_3);
+	Two_to_One_Mux m1_4(l0_7, l0_8, s[1], l1_4);
+
+	Two_to_One_Mux m2_1(l1_1, l1_2, s[2], l2_1);
+	Two_to_One_Mux m2_2(l1_3, l1_4, s[2], l2_2);
+
+	Two_to_One_Mux m3_1(l2_1, l2_2, s[3], l3_1);
+
+	assign val = l3_1;
 
 endmodule
