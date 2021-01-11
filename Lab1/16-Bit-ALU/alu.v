@@ -80,7 +80,10 @@ module alu (
 
 	assign inv_value = ~a;
 	assign inv_of = 0;
-	
+
+	/* 
+	 * Ctrl 9 - Less than or equal to (a <= b)
+	 */
 	wire [15:0] lte_value;
 	wire lte_of;
 
@@ -90,15 +93,26 @@ module alu (
 	add16 l0(~b, 1, carry, lte_subval0);
 	add16 l1(a, lte_subval0, carry, lte_subval1); // a-b
 
-	assign lte_value[0] = lte_subval1[15] | (
-						  ~lte_subval1[15] & ~lte_subval1[14] &
-						  ~lte_subval1[13] & ~lte_subval1[12] &
-						  ~lte_subval1[11] & ~lte_subval1[10] &
-						  ~lte_subval1[9]  & ~lte_subval1[8]  &
-						  ~lte_subval1[7]  & ~lte_subval1[6]  &
-						  ~lte_subval1[5]  & ~lte_subval1[4]  &
-						  ~lte_subval1[3]  & ~lte_subval1[2]  &
-						  ~lte_subval1[1]  & ~lte_subval1[0]); // <= 0
+	assign lte_value[0] = ((lte_subval1[15] | (
+								  ~lte_subval1[15] & ~lte_subval1[14] &
+								  ~lte_subval1[13] & ~lte_subval1[12] &
+								  ~lte_subval1[11] & ~lte_subval1[10] &
+								  ~lte_subval1[9]  & ~lte_subval1[8]  &
+								  ~lte_subval1[7]  & ~lte_subval1[6]  &
+								  ~lte_subval1[5]  & ~lte_subval1[4]  &
+								  ~lte_subval1[3]  & ~lte_subval1[2]  &
+								  ~lte_subval1[1]  & ~lte_subval1[0])) 
+								  & ~(lte_subval1[15] & lte_subval0[15])) | 
+						(~(lte_subval1[15] | (
+								  ~lte_subval1[15] & ~lte_subval1[14] &
+								  ~lte_subval1[13] & ~lte_subval1[12] &
+								  ~lte_subval1[11] & ~lte_subval1[10] &
+								  ~lte_subval1[9]  & ~lte_subval1[8]  &
+								  ~lte_subval1[7]  & ~lte_subval1[6]  &
+								  ~lte_subval1[5]  & ~lte_subval1[4]  &
+								  ~lte_subval1[3]  & ~lte_subval1[2]  &
+								  ~lte_subval1[1]  & ~lte_subval1[0])) 
+								  & (lte_subval1[15] & lte_subval0[15])); // <= 0
 	assign lte_value[1] = 0;
 	assign lte_value[2] = 0;
 	assign lte_value[3] = 0;
@@ -201,7 +215,7 @@ module alu (
 	end
 
 	assign lsr_value = right_logic;
-	assign lsr_of = a[15];
+	assign lsr_of = (a[15] & ~right_logic[15]) | (~a[15] & right_logic[15]);
 
 	/* 
 	 * Ctrl 12 - Arithmetic shift left (a << b)
