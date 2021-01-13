@@ -14,6 +14,8 @@ module register_file_tb();
 	wire [15:0] bsA;
 	wire [15:0] bsB;
 
+	reg [1:0] i;
+
 	initial begin
 		clk = 1;
 		rstVal = 1;
@@ -22,15 +24,40 @@ module register_file_tb();
 		readA = 0;
 		readB = 0;
 		write = 0;
+		i = -1;
 	end
 	always #5 clk = ~clk;
 	always @(posedge clk) begin
-		rstVal = 0;
-		enableWrite = 1;
-		writeVal = 15;
-		readA = 3;
-		readB = 2;
-		write = 3;
+		i = i + 1;
+		if(i == 0) begin
+			rstVal = 0;
+			enableWrite = 1;
+			writeVal = 15;
+			readA = 3;
+			readB = 4;
+			write = 4;
+		end else if(i == 1) begin 
+			rstVal = 0;
+			enableWrite = 1;
+			writeVal = 15;
+			readA = 4;
+			readB = 4;
+			write = 3;
+		end else if(i == 2) begin
+			rstVal = 0;
+			enableWrite = 1;
+			writeVal = 7;
+			readA = 3;
+			readB = 4;
+			write = 4;
+		end else begin
+			rstVal = 1;
+			enableWrite = 1;
+			writeVal = 7;
+			readA = 3;
+			readB = 4;
+			write = 4;
+		end
 	end
 
 	/*

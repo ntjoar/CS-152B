@@ -13,15 +13,35 @@ module alu_tb();
 
 	initial begin
 		clk = 1;
-		ctrl = 0;
+		ctrl = -1;
 		in0 = 0;
 		in1 = 0;
 	end
 	always #5 clk = ~clk;
 	always @(posedge clk) begin
-		ctrl = 1;
-		in0 = 15;
-		in1 = 2;
+		ctrl = ctrl + 1;
+		if(ctrl == 0) begin
+			in0 = -32768;
+			in1 = 2;
+		end else if (ctrl == 1) begin
+			in0 = 32767;
+			in1 = 2;
+		end else if (ctrl == 4) begin
+			in0 = -32768;
+			in1 = 2;
+		end else if (ctrl == 5) begin
+			in0 = 32767;
+			in1 = 2;
+		end else if (ctrl == 8 || ctrl == 12) begin
+			in0 = 32767;
+			in1 = 1;
+		end else if (ctrl == 10) begin
+			in0 = -1;
+			in1 = 1;
+		end else begin
+			in0 = 15;
+			in1 = 2;
+		end
 	end
 
 	/*

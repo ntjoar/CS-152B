@@ -93,26 +93,11 @@ module alu (
 	add16 l0(~b, 1, carry, lte_subval0);
 	add16 l1(a, lte_subval0, carry, lte_subval1); // a-b
 
-	assign lte_value[0] = ((lte_subval1[15] | (
-								  ~lte_subval1[15] & ~lte_subval1[14] &
-								  ~lte_subval1[13] & ~lte_subval1[12] &
-								  ~lte_subval1[11] & ~lte_subval1[10] &
-								  ~lte_subval1[9]  & ~lte_subval1[8]  &
-								  ~lte_subval1[7]  & ~lte_subval1[6]  &
-								  ~lte_subval1[5]  & ~lte_subval1[4]  &
-								  ~lte_subval1[3]  & ~lte_subval1[2]  &
-								  ~lte_subval1[1]  & ~lte_subval1[0])) 
-								  & ~(lte_subval1[15] & lte_subval0[15])) | 
-						(~(lte_subval1[15] | (
-								  ~lte_subval1[15] & ~lte_subval1[14] &
-								  ~lte_subval1[13] & ~lte_subval1[12] &
-								  ~lte_subval1[11] & ~lte_subval1[10] &
-								  ~lte_subval1[9]  & ~lte_subval1[8]  &
-								  ~lte_subval1[7]  & ~lte_subval1[6]  &
-								  ~lte_subval1[5]  & ~lte_subval1[4]  &
-								  ~lte_subval1[3]  & ~lte_subval1[2]  &
-								  ~lte_subval1[1]  & ~lte_subval1[0])) 
-								  & (lte_subval1[15] & lte_subval0[15])); // <= 0
+	assign lte_value[0] = (lte_subval1[15] | (a[15] & ~b[15]) | 
+			       (~lte_subval1[15] & ~lte_subval1[14] & ~lte_subval1[13] & ~lte_subval1[12] &
+				~lte_subval1[11] & ~lte_subval1[10] &  ~lte_subval1[9] &  ~lte_subval1[8] &
+				 ~lte_subval1[7] &  ~lte_subval1[6] &  ~lte_subval1[5] &  ~lte_subval1[4] &
+				 ~lte_subval1[3] &  ~lte_subval1[2] &  ~lte_subval1[1] &  ~lte_subval1[0]));
 	assign lte_value[1] = 0;
 	assign lte_value[2] = 0;
 	assign lte_value[3] = 0;
