@@ -24,7 +24,7 @@ module alu (
 	add16 n0(~b, 1, carry, outval);
 
 	add16 n1(a, outval, carry, sub_value);
-	assign sub_of = (outval[15] & sub_value[15]); // overflow
+	assign sub_of = ((outval[15] & ~sub_value[15] & a[15]) | (~outval[15] & sub_value[15] & ~a[15])); // overflow
 
 	/* 
 	 * Ctrl 1 - Addition (a+b)
@@ -61,7 +61,7 @@ module alu (
 	wire dec_of;
 
 	add16 d0(a, -1, carry, dec_value);
-	assign dec_of = 1 & dec_value[15];
+	assign dec_of = a[15] & ~dec_value[15];
 
 	/* 
 	 * Ctrl 5 - Increment (a+1)
