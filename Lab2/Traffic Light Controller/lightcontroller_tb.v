@@ -1,4 +1,4 @@
-`timescale 1ns/1ns
+`timescale 1ms/1ms
 module lightcontroller_tb;
     reg clk;
     reg set;
@@ -8,13 +8,13 @@ module lightcontroller_tb;
     initial begin
 		clk = 1;
     end
-    always #5 clk = ~clk;
+    always #500 clk = ~clk;
 
     initial begin
         set = 1;
-        #15;
+        #1500;
         set = 0;
-        #1000;
+        #10000;
         $stop;
     end
 
