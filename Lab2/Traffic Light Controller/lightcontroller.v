@@ -54,8 +54,8 @@ module lightcontroller (
 
             case (state)
                 main_g: begin
-                    if((seconds_passed == 11 && sensor_flag == 0) || (seconds_passed == 8 && sensor_flag == 1)) begin // -1 bc 0 is a second
-                        seconds_passed = 0;
+                    if((seconds_passed == 12 && sensor_flag == 0) || (seconds_passed == 9 && sensor_flag == 1)) begin 
+                        seconds_passed = 1;
                         state = main_y; 
                         sensor_flag = 0;
                     end else begin
@@ -67,8 +67,8 @@ module lightcontroller (
                     end
                 end
                 main_y: begin
-                    if(seconds_passed == 1) begin // -1 bc 0 is a second
-                        seconds_passed = 0;
+                    if(seconds_passed == 2) begin 
+                        seconds_passed = 1;
                         if(walk_flag == 1) begin
                             state = cross;
                         end else begin
@@ -80,21 +80,21 @@ module lightcontroller (
                     end
                 end
                 side_g: begin
-                    if((seconds_passed == 5 && sensor_flag == 0) || (seconds_passed == 8 && sensor_flag == 1)) begin// -1 bc 0 is a second
-                        seconds_passed = 0;
+                    if((seconds_passed == 6 && sensor_flag == 0) || (seconds_passed == 9 && sensor_flag == 1)) begin
+                        seconds_passed = 1;
                         state = side_y; 
                         sensor_flag = 0;
                     end else begin
                         seconds_passed = seconds_passed + 1;
-                        if(seconds_passed == 5 && sen == 1) begin // Sensor high at the end of side green state
+                        if(seconds_passed == 6 && sen == 1) begin
                             sensor_flag = 1;
                         end
                         state = side_g;
                     end
                 end
                 side_y: begin
-                    if(seconds_passed == 1) begin // -1 bc 0 is a second
-                        seconds_passed = 0;
+                    if(seconds_passed == 2) begin 
+                        seconds_passed = 1;
                         state = main_g; 
                     end else begin
                         seconds_passed = seconds_passed + 1;
@@ -102,8 +102,8 @@ module lightcontroller (
                     end
                 end
                 cross: begin
-                    if(seconds_passed == 2) begin // -1 bc 0 is a second
-                        seconds_passed = 0;
+                    if(seconds_passed == 3) begin
+                        seconds_passed = 1;
                         walk_flag = 0;
                         state = side_g; 
                     end else begin

@@ -2,6 +2,8 @@
 module lightcontroller_tb;
     reg clk;
     reg set;
+    reg walk;
+    reg sensor;
 
     wire Rs, Ys, Gs, Rm, Ym, Gm, w;
 
@@ -12,8 +14,10 @@ module lightcontroller_tb;
 
     initial begin
         set = 1;
-        #1500;
+        #2000;
         set = 0;
+	walk = 1;
+	sensor = 1;
         #10000;
         $stop;
     end
@@ -34,6 +38,6 @@ module lightcontroller_tb;
      * );
      */
 
-    lightcontroller MUT(set, clk, 0, 1, Rm, Ym, Gm, Rs, Ys, Gs, w);
+    lightcontroller MUT(set, clk, walk, sensor, Rm, Ym, Gm, Rs, Ys, Gs, w);
     
 endmodule
