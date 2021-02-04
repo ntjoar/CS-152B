@@ -1,5 +1,5 @@
 /*
- * Brightness module for lab 
+ * Brightness module for lab 3
  */
 
 module brightness (
@@ -26,7 +26,6 @@ module brightness (
     reg [31:0] bit_to_return; // Which bit are we returning
 
     /* Temp variables */
-    integer i;
     reg [8:0] replacement;
 
     /* Do stuff here */ 
