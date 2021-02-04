@@ -4,8 +4,8 @@ module median_filter_tb;
     reg [31:0] bits_in;
 
     /* Image parameters, just using size of int_32 */
-    parameter [31:0] Width = 1080; // width
-    parameter [31:0] Depth = 1080; // length
+    parameter [31:0] Depth = 410; // width
+    parameter [31:0] Width = 361; // length
     parameter [31:0] filter_size = Width*Depth;
 
     /* File handlers and data */
