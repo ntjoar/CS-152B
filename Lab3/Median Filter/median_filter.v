@@ -49,6 +49,7 @@ module median_filter (
                 /* It goes down first and then by row */
                 /* 0 padding on the values around it */
                 /* Will have to make the assumtion that the original image array in mat lab is width across and depth down */
+                /* Resource used: sciencedirect.com/topics/engineering/median-filters */
 
                 /* Check window */
                 // Center bit
