@@ -1,8 +1,8 @@
 white = 255;
 black = 0;
 range = 255;
-width = 1080;
-height = 1080;
+width = 410;
+height = 361;
 % Change this for different images
 image = imread('sample.bmp');
 

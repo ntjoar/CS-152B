@@ -97,7 +97,7 @@ module resize_tb;
     end
 
     /*
-     * module low_pass (
+     * module resize (
      *  input rst,
      *  input [7:0] image_input,
      *  input enable,
