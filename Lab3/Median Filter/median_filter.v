@@ -54,6 +54,7 @@ module median_filter (
                 /* Check window */
                 // Center bit
                 window[0] = filtered_image[bit_to_return]; 
+                pos_filled = 0;
 
                 // Middle bit is on top row
                 if((bit_to_return %  Depth) == 0) begin
