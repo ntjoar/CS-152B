@@ -246,7 +246,11 @@ module crypto_dimension(
                         storage_id = 0;
                     end
                 end
-                current = storage_id - 1;
+                if(storage_id != 0) begin
+                    current = storage_id - 1;
+                end else begin 
+                    current = 0;
+                end
             end
 
             display_data = storage[current] ^ enc_mask;
